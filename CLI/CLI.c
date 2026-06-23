@@ -12,9 +12,7 @@ void CLI_process(void){
     while(USART_rx_avail()){
         char c = USART_get_data();
 
-        if(c == '\r') continue;
-
-        if(c ==  '\n'){
+        if(c ==  '\n' || c == '\r'){
             CLI_buffer[CLI_index] = '\0';         // Terminate string
             CLI_execute(CLI_buffer);             // Passing string to execute function
             CLI_index = 0;   // Buffer reset
