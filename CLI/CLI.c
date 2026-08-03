@@ -31,50 +31,41 @@ void CLI_execute(char *cmd){
     /* LED on/off */
     if(strcmp(cmd, "led on") == 0){
         led_set_state(state_led_on);
-        USART_print("LED ON\n");
+        MSG_set_state(LED_ON);
     }
     else if(strcmp(cmd, "led off") == 0){
         led_set_state(state_led_off);
-        USART_print("LED OFF\n");
+        MSG_set_state(LED_OFF);
     }
 
     /* LED ramp and fade */
     else if(strcmp(cmd, "start led ramp") == 0){
         pwm_set_state(state_led_on);
-        USART_print("LED RAMP STARTED\n");
+        MSG_set_state(RAMP_START);
     }
     else if(strcmp(cmd, "stop led ramp") == 0){
         pwm_set_state(state_led_off);
-        USART_print("LED RAMP STOPPED\n");
+        MSG_set_state(RAMP_OFF);
     }
     else if(strcmp(cmd, "start led fade") == 0){
         pwm_set_state(state_led_fade);
-        USART_print("LED FADE STARTED\n");
+        MSG_set_state(FADE_START);
     }
 
     /* GAS detection */
-    else if(strcmp(cmd, "gas detect") == 0){
+    else if(strcmp(cmd, "adc detect") == 0){
         adc_set_state(GAS_start_detect);
-        
-        USART_print("DETECTION STARTED!\n");
-        USART_print("ENTER COMMAND AGAIN TO PRINT\n");
-        
-        // Print gas status (HIGH or LOW)
-        if(gas_status() == GAS_high){
-            USART_print("GAS: ");
-            USART_printIN(gas_result());
-            USART_print(" HIGH\n");
-        }
-        else if(gas_status() == GAS_low){
-            USART_print("GAS: ");
-            USART_printIN(gas_result());
-            USART_print(" LOW\n");
-        }
-    
+        MSG_set_state(START_ADC);
     }
-    else if(strcmp(cmd, "stop gas detect") == 0){
+    else if(strcmp(cmd, "stop adc detect") == 0){
         adc_set_state(GAS_stop_detect);
-        USART_print("DETECTION STOPPED\n");
+        MSG_set_state(STOP_ADC);
+    }
+
+    /* Distance measurement */
+    else if(strcmp(cmd,"measure distance") == 0){
+        HCSR04_set_state(START);
+        MSG_set_state(START_DISTANCE);
     }
     else {
         USART_print("Invalid command\n");
