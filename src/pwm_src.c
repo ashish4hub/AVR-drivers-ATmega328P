@@ -16,7 +16,7 @@ void run_led_rampup(void){
     
     if(nb_wait_ms(&duty_wait,50)){
 
-        pwm_set(pwm_CH1A,duty);
+        pwm_set(pwm_CH2B,duty);
         duty++;
 
         if(duty > 100){
@@ -47,7 +47,7 @@ void led_fade(void){
         else if(duty == 0){
             step = 1;
         }
-        pwm_set(pwm_CH1A,duty);
+        pwm_set(pwm_CH2B,duty);
     }
 }
 
@@ -74,16 +74,16 @@ void pwm_src(void){
     switch (pwm_state)
     {
     case state_ramp_on:
-        pwm_start(pwm_CH1A);
+        pwm_start(pwm_CH2B);
         run_led_rampup();
         break;
     
     case state_ramp_off:
-        pwm_disable(pwm_CH1A);
+        pwm_disable(pwm_CH2B);
         break;
     
     case state_led_fade:
-        pwm_start(pwm_CH1A);
+        pwm_start(pwm_CH2B);
         led_fade();
     }
 }
