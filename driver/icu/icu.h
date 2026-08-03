@@ -31,7 +31,6 @@ typedef struct{
     ICU_noise_t noise;
 } ICU_config_t;
 
-
 /* Public APIs */
 void ICU_init(const ICU_config_t *config);
 void ICU_set_edge(ICU_edge_t edge);
