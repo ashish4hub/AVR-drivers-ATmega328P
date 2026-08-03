@@ -8,7 +8,7 @@
 /* pwm_CH2B ----> PD3 */
 
         /* APIs */
-/* pwm_init(freq, timer) -----> Initialize PWM with desired fequency and Timer (TIMER1 / TIMER0) */
+/* pwm_init(freq, timer) -----> Initialize PWM with desired fequency and Timer (TIMER1 / TIMER2) */
 /* pwm_set(channel, duty_percent) -----> PWM channel (pin) and duty (0 - 100) */
 
 #define F_CPU 16000000UL
