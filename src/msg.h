@@ -10,6 +10,7 @@
 /* State */
 typedef enum{
     Idle,
+    Quit,
     START_DISTANCE,
     STOP_DISTANCE,
     START_ADC,
