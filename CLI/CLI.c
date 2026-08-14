@@ -52,20 +52,22 @@ void CLI_execute(char *cmd){
         MSG_set_state(FADE_START);
     }
 
-    /* GAS detection */
-    else if(strcmp(cmd, "adc detect") == 0){
+    /* Moisture detection */
+    else if(strcmp(cmd, "start moist detect") == 0){
         adc_set_state(GAS_start_detect);
         MSG_set_state(START_ADC);
-    }
-    else if(strcmp(cmd, "stop adc detect") == 0){
-        adc_set_state(GAS_stop_detect);
-        MSG_set_state(STOP_ADC);
     }
 
     /* Distance measurement */
     else if(strcmp(cmd,"measure distance") == 0){
         HCSR04_set_state(START);
         MSG_set_state(START_DISTANCE);
+    }
+    /* Quit */
+    else if(strcmp(cmd,"x") == 0){
+        MSG_set_state(Quit);
+        adc_set_state(GAS_stop_detect);
+        HCSR04_set_state(STOP);
     }
     else {
         USART_print("Invalid command\n");
